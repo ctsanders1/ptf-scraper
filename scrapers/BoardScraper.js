@@ -30,6 +30,7 @@ class BoardScraper extends ScraperBase {
                 <p>
                     ${createdBy}<br/>
                     ${publishedAt}
+                    ${process.env.NODE_ENV}
                 </p>
                 <a href="${config.baseUrl}${link}">Pogledaj obavijest</a>
             `

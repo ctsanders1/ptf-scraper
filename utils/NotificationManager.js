@@ -4,6 +4,7 @@
  */
 
 const fileManager = require('./FileManager')
+const appStrings = require('../config/appStrings')
 
 class NotificationManager {
     constructor (storageFilePath, mailManagement) {
@@ -15,6 +16,7 @@ class NotificationManager {
     }
 
     _sendNotification (mailOptions) {
+        console.log(appStrings.sendingMail)
         this.mailManagement.sendMail(mailOptions)
     }
 
@@ -25,6 +27,8 @@ class NotificationManager {
                 if (content.toString() !== stringNotification) {
                     this._sendNotification(mailOptions)
                     return fileManager.writeToFile(this.storageFilePath, stringNotification)
+                } else {
+                    console.log(appStrings.noNotifications);
                 }
             })
             .catch((error) => console.log(error))
