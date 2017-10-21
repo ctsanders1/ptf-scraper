@@ -1,0 +1,24 @@
+{
+  "name": "ptf-scraper",
+  "version": "0.1.0",
+  "description": "Web scraper for PTF OS",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "export NODE_ENV=local && nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scraper",
+    "node",
+    "web"
+  ],
+  "author": "Danijel Vincijanovic",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^4.0.0",
+    "nodemailer": "^4.2.0"
+  }
+}
