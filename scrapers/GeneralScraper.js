@@ -7,10 +7,11 @@ const ScraperBase = require('./ScraperBase')
 const MailManager = require('../utils/MailManager')
 const config = require('../config/config')
 
-class BoardScraper extends ScraperBase {
-    constructor (url, notificationManager, recipients) {
+class GeneralScraper extends ScraperBase {
+    constructor ({ url, notificationManager, recipients, notificationType }) {
         super(url)
         this.recipients = recipients
+        this.notificationType = notificationType
         this.notificationManager = notificationManager
     }
 
@@ -18,7 +19,7 @@ class BoardScraper extends ScraperBase {
         return MailManager.composeMail({
             from: '"PTF OS" <danijel.vincijanovic@gmail.com>',
             to: this.recipients,
-            subject: `PTF Oglasna ploča - ${subject}`,
+            subject: `PTF ${this.notificationType} - ${subject}`,
             text: `
                 ${subject}
                 ${createdBy}
@@ -55,4 +56,4 @@ class BoardScraper extends ScraperBase {
     }
 }
 
-module.exports = BoardScraper
+module.exports = GeneralScraper

@@ -16,9 +16,12 @@ const baseUrl = 'http://www.ptfos.unios.hr'
 module.exports = {
     baseUrl,
     boardUrl: `${baseUrl}/index.php/oglasna-ploa`,
+    resultUrl: `${baseUrl}/index.php/rezultati-ispita-i-kolokvija`,
     boardStoragePath: path.join(storageDir, 'board-notifications.txt'),
+    resultStoragePath: path.join(storageDir, 'result-notifications.txt'),
     boardNotificationRecipients: JSON.parse(process.env.BOARD_NOTIFICATION_RECIPIENTS),
-    boardScraperInterval: Number(process.env.BOARD_SCRAPER_INTERVAL_IN_MINUTES),
+    resultNotificationRecipients: JSON.parse(process.env.RESULT_NOTIFICATION_RECIPIENTS),
+    scraperInterval: Number(process.env.SCRAPER_INTERVAL_IN_MINUTES),
     smtp: {
         host: process.env.MAIL_HOST,
         port: process.env.MAIL_PORT,

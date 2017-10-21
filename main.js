@@ -4,19 +4,34 @@
  */
 
 const MailManager = require('./utils/MailManager')
-const BoardScraper = require('./scrapers/BoardScraper')
+const GeneralScraper = require('./scrapers/GeneralScraper')
 const NotificationManager = require('./utils/NotificationManager')
 const config = require('./config/config')
 const appStrings = require('./config/appStrings')
 
 const mailManager = new MailManager()
 const boardNotificationManager = new NotificationManager(config.boardStoragePath, mailManager)
-const boardScraper = new BoardScraper(config.boardUrl, boardNotificationManager, config.boardNotificationRecipients)
+const resultNotificationManager = new NotificationManager(config.resultStoragePath, mailManager)
+
+const boardScraper = new GeneralScraper({
+    url: config.boardUrl,
+    notificationManager: boardNotificationManager,
+    notificationType: 'Oglasna ploča',
+    recipients: config.boardNotificationRecipients
+})
+
+const resultScraper = new GeneralScraper({
+    url: config.resultUrl,
+    notificationManager: resultNotificationManager,
+    notificationType: 'Rezultati',
+    recipients: config.resultNotificationRecipients
+})
 
 function startScraper () {
-    console.log(appStrings.startingScraper)
+    console.log(appStrings.startingScrapers)
     boardScraper.run()
-    setTimeout(startScraper, 1000 * 60 * config.boardScraperInterval)
+    resultScraper.run()
+    setTimeout(startScraper, 1000 * 60 * config.scraperInterval)
 }
 
 startScraper()

@@ -24,6 +24,7 @@ class NotificationManager {
         const stringNotification = JSON.stringify(notification)
         fileManager.readFile(this.storageFilePath)
             .then((content) => {
+                console.log(`Processing: ${this.storageFilePath}`)
                 if (content.toString() !== stringNotification) {
                     console.log(appStrings.newNotification)
                     this._sendNotification(mailOptions)

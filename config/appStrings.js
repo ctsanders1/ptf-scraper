@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-    startingScraper: 'Running board scraper...',
+    startingScrapers: 'Running scrapers...',
     noNotifications: '0 new notifications',
     newNotification: 'New notification!',
     sendingMail: 'Sending new notification to all recipients...',
