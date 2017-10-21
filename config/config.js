@@ -18,6 +18,7 @@ module.exports = {
     boardUrl: `${baseUrl}/index.php/oglasna-ploa`,
     boardStoragePath: path.join(storageDir, 'board-notifications.txt'),
     boardNotificationRecipients: JSON.parse(process.env.BOARD_NOTIFICATION_RECIPIENTS),
+    boardScraperInterval: Number(process.env.BOARD_SCRAPER_INTERVAL_IN_MINUTES),
     smtp: {
         host: process.env.MAIL_HOST,
         port: process.env.MAIL_PORT,

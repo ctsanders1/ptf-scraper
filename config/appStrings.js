@@ -8,5 +8,6 @@ module.exports = {
     noNotifications: '0 new notifications',
     newNotification: 'New notification!',
     sendingMail: 'Sending new notification to all recipients...',
-    messageSent: 'Message sent!'
+    messageSent: 'Notification send success',
+    endingScraper: '...board scraper finished with work'
 }
