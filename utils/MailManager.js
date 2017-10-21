@@ -5,6 +5,7 @@
 
 const nodemailer = require('nodemailer')
 const config = require('../config/config')
+const appStrings = require('../config/appStrings')
 
 class MailManager {
     static composeMail ({ from, to, subject, text, html }) {
@@ -21,7 +22,7 @@ class MailManager {
         let transporter = nodemailer.createTransport(config.smtp)
         transporter.sendMail(mailOptions, (error) => {
             if (error) return console.log(error)
-            console.log('Message sent!')
+            console.log(appStrings.messageSent)
         })
     }
 }

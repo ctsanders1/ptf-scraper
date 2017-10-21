@@ -25,6 +25,7 @@ class NotificationManager {
         fileManager.readFile(this.storageFilePath)
             .then((content) => {
                 if (content.toString() !== stringNotification) {
+                    console.log(appStrings.newNotification)
                     this._sendNotification(mailOptions)
                     return fileManager.writeToFile(this.storageFilePath, stringNotification)
                 } else {
