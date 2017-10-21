@@ -16,7 +16,6 @@ const boardScraper = new BoardScraper(config.boardUrl, boardNotificationManager,
 function startScraper () {
     console.log(appStrings.startingScraper)
     boardScraper.run()
-    console.log(appStrings.endingScraper)
     setTimeout(startScraper, 1000 * 60 * config.boardScraperInterval)
 }
 
