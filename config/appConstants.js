@@ -7,5 +7,9 @@ module.exports = {
     env: {
         LOCAL: 'local',
         PRODUCTION: 'production'
+    },
+    redisKeys: {
+        BOARD_LAST_NOTIFICATION: 'BOARD_LAST_NOTIFICATION',
+        RESULT_LAST_NOTIFICATION: 'RESULT_LAST_NOTIFICATION',
     }
 }

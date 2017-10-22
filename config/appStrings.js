@@ -7,6 +7,7 @@ module.exports = {
     startingScrapers: 'Running scrapers...',
     noNotifications: '0 new notifications',
     newNotification: 'New notification!',
+    initializingStorage: 'Initializing storage',
     sendingMail: 'Sending new notification to all recipients...',
     messageSent: 'Notification send success'
 }

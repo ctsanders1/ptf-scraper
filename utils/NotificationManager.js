@@ -3,16 +3,12 @@
  * Contact: danijel.vincijanovic@gmail.com
  */
 
-const fileManager = require('./FileManager')
 const appStrings = require('../config/appStrings')
 
 class NotificationManager {
-    constructor (storageFilePath, mailManagement) {
-        this.storageFilePath = storageFilePath
+    constructor (storageManager, mailManagement) {
+        this.storageManager = storageManager;
         this.mailManagement = mailManagement
-        if (!fileManager.isCreated(storageFilePath)) {
-            fileManager.createFile(storageFilePath)
-        }
     }
 
     _sendNotification (mailOptions) {
@@ -20,17 +16,27 @@ class NotificationManager {
         this.mailManagement.sendMail(mailOptions)
     }
 
-    handleNotification (notification, mailOptions) {
-        const stringNotification = JSON.stringify(notification)
-        fileManager.readFile(this.storageFilePath)
-            .then((content) => {
-                console.log(`Processing: ${this.storageFilePath}`)
-                if (content.toString() !== stringNotification) {
-                    console.log(appStrings.newNotification)
-                    this._sendNotification(mailOptions)
-                    return fileManager.writeToFile(this.storageFilePath, stringNotification)
+    _saveNotification (notification, notificationStorageKey) {
+        this.storageManager.set(notificationStorageKey, notification)
+            .catch((error) => console.log(error))
+    }
+
+    handleNotification (notification, mailOptions, notificationStorageKey) {
+        console.log(`Processing: ${notificationStorageKey}`)
+        this.storageManager.get(notificationStorageKey)
+            .then((lastNotification) => {
+                if (lastNotification) {
+                    if (JSON.stringify(notification) !== JSON.stringify(lastNotification)) {
+                        console.log(appStrings.newNotification)
+                        this._saveNotification(notification, notificationStorageKey)
+                        this._sendNotification(mailOptions)
+                    } else {
+                        console.log(`${appStrings.noNotifications} for ${notificationStorageKey}`);
+                    }
                 } else {
-                    console.log(appStrings.noNotifications);
+                    console.log(`${appStrings.noNotifications} for ${notificationStorageKey}`);
+                    console.log(appStrings.initializingStorage)
+                    this._saveNotification(notification, notificationStorageKey)
                 }
             })
             .catch((error) => console.log(error))

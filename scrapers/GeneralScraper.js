@@ -8,10 +8,11 @@ const MailManager = require('../utils/MailManager')
 const config = require('../config/config')
 
 class GeneralScraper extends ScraperBase {
-    constructor ({ url, notificationManager, recipients, notificationType }) {
+    constructor ({ url, notificationManager, recipients, notificationType, notificationStorageKey }) {
         super(url)
         this.recipients = recipients
         this.notificationType = notificationType
+        this.notificationStorageKey = notificationStorageKey
         this.notificationManager = notificationManager
     }
 
@@ -47,7 +48,7 @@ class GeneralScraper extends ScraperBase {
         const notification = { subject, link, createdBy, publishedAt }
 
         const mailOptions = this._prepareMailOptions(notification)
-        this.notificationManager.handleNotification(notification, mailOptions)
+        this.notificationManager.handleNotification(notification, mailOptions, this.notificationStorageKey)
     }
 
     run () {
